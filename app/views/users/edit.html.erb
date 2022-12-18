@@ -24,8 +24,8 @@
       <p class="mt"><%= form.label :password_confirmation, "Подтверждение пароля" %></p>
       <p><%= form.password_field :password_confirmation, class: "form-text-field" %></p>
 
-      <p class="mt"><%= form.label :favcolor, "Выбор цвета шапки" %></p>
-      <p><%= form.color_field :favcolor, value: "#FFFFFF", class: "form-color-field"%></p>
+      <p class="mt"><%= form.label :favorite_color, "Выбор цвета шапки" %></p>
+      <p><%= form.color_field :favorite_color, value: @user[:favorite_color], class: "form-color-field"%></p>
 
       <p class="mt-lg">
         <%= form.submit "Сохранить", class: "button button-main"%>

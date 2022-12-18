@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  before_save :downcase_nickname, :default_color
+  before_save :downcase_nickname, :set_default_color
 
   validates :email, presence: true, uniqueness: true,
             format: { with: /\A[\w]+@[\w]+.[\w]+.?[\w]+?\z/ }
@@ -13,7 +13,7 @@ class User < ApplicationRecord
     nickname.downcase!
   end
 
-  def default_color
-    self.favcolor ||= "#370617"
+  def set_default_color
+    self.favorite_color ||= "#370617"
   end
 end

@@ -1,6 +1,5 @@
-<% hidden = "hidden" if question.hidden? %>
-<div class="mb-sm <%= hidden %>">
-  <%= simple_format(strip_tags(question.body)) %>
+<div class="mb-sm">
+  <%= simple_format(html_escape(question.body)) %>
 </div>
 <div class="text-sm question-footer">
   <div class="text-grey">

@@ -11,6 +11,10 @@ a, button {
   font-size: 175%;
 }
 
+.right {
+  text-align: right;
+}
+
 .title-md, title {
   font-size: 150%;
 }
@@ -23,6 +27,10 @@ a, button {
   font-size: 80%;
 }
 
+.text-md {
+  font-size: 100%;
+}
+
 .hidden {
   opacity: 50%;
 }
@@ -33,6 +41,10 @@ a, button {
 
 .text-red {
   color: #d00000;
+}
+
+.text-dark-red {
+  color: #9d0208;
 }
 
 .text-bold {

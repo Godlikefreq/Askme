@@ -7,7 +7,7 @@
   <%= link_to "Спроси меня", new_question_path(user_id: @user.id), class: "button button-yellow" %>
 
   <p class="mt">
-    <%= render 'questions/form', question: @question %>
+    <%= render "questions/form", question: @question %>
   </p>
 </div>
 
@@ -17,6 +17,10 @@
     <%= inclination(@questions.count, "вопрос", "вопроса", "вопросов") %>
   </h2>
 </div>
+
+<% if @questions.count == 0 %>
+  <%= render "empty_state" %>
+<% end %>
 
 <% @questions.each do |question| %>
   <div class="mt-sm container <%= "hidden" if question.hidden? %>">

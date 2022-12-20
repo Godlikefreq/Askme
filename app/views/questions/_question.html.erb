@@ -1,16 +1,35 @@
 <div class="mb-sm">
   <%= simple_format(html_escape(question.body)) %>
 </div>
+
+<% if question.answer.present? %>
+  <div class="mb-sm text-dark-red">
+    <%= question.answer %>
+  </div>
+<% end %>
+
 <div class="text-sm question-footer">
   <div class="text-grey">
     <%= l(question.created_at, format: :short) %>
   </div>
 
-  <div>
-    <%= link_to fa_icon('pencil'), edit_question_path(question), title: 'Изменить вопрос' %>
-    <%= button_to fa_icon('trash-o'), question_path(question), method: :delete,
-                  title: 'Удалить вопрос', form: { data: { turbo_confirm: 'Точно удалить вопрос?' } } %>
-    <%= button_to fa_icon('eye'), hide_question_path(question), method: :put,
-                  title: 'Скрыть/вернуть вопрос' %>
-  </div>
+  <% if current_user == question.user %>
+    <div>
+      <% edit_icon = (question.answer.present? ? "pencil" : "reply") %>
+      <% notification_text = (question.answer.present? ? "Изменить вопрос" : "Ответить") %>
+
+      <%= link_to fa_icon(edit_icon), edit_question_path(question), title: notification_text,
+                  class: "mr-sm"%>
+      <%= button_to fa_icon('trash-o'), question_path(question), method: :delete, class: "mr-sm",
+                    title: 'Удалить вопрос', form: { data: { turbo_confirm: 'Точно удалить вопрос?' } } %>
+      <%= button_to fa_icon('eye'), hide_question_path(question), method: :put,
+                    title: 'Скрыть/вернуть вопрос' %>
+    </div>
+  <% end %>
 </div>
+
+<% if question.author.present? %>
+  <div class="right">
+    <p class="text-bold mt">Вопрос от <%= link_to display_nickname(question.author), user_path(question.author) %></p>
+  </div>
+<% end %>

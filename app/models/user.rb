@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  before_validation :downcase_nickname
+
   validates :email, presence: true, uniqueness: true,
             format: { with: /\A[\w]+@[\w]+.[\w]+.?[\w]+?\z/ }
   validates :nickname, length: { maximum: 40 }, uniqueness: true,
@@ -9,11 +11,9 @@ class User < ApplicationRecord
 
   has_many :questions, dependent: :delete_all
 
+  private
+
   def downcase_nickname
     nickname&.downcase!
   end
-
-  private
-
-  before_validation :downcase_nickname
 end

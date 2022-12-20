@@ -1,3 +1,15 @@
+<div class="container">
+  <h2 class="title-lg mb">
+    Недавно добавились
+  </h2>
+
+  <div class="users-box">
+    <% @users.each do |user| %>
+      <%= render partial: "users/user_avatar", locals: {user: user} %>
+    <% end %>
+  </div>
+</div>
+
 <div class="container mt-sm">
   <h2 class="title-lg mb">
     <%= @questions.count %>
@@ -7,6 +19,10 @@
 
 <% @questions.each do |question| %>
   <div class="mt-sm container <%= "hidden" if question.hidden? %>">
+    <p class="mb text-sm text-grey">
+      Вопрос <%= link_to "##{question.id}", questions_path(question) %>
+      для юзера <%= link_to "@#{question.user.nickname}", user_path(question.user) %>
+    </p>
     <%= render question %>
   </div>
 <% end %>

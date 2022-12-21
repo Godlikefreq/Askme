@@ -30,6 +30,6 @@
 
 <% if question.author.present? %>
   <div class="right">
-    <p class="text-bold mt">Вопрос от <%= link_to display_nickname(question.author), user_path(question.author) %></p>
+    <p class="text-bold mt">Вопрос от <%= link_to display_nickname(question.author), user_path(question.author.nickname) %></p>
   </div>
 <% end %>

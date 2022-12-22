@@ -1,6 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
 
+  def to_param
+    nickname
+  end
+
   before_validation :downcase_nickname
 
   validates :email, presence: true, uniqueness: true,

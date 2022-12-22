@@ -1,7 +1,7 @@
 <div class="container">
   <% hidden = "(Скрытый)" if @question.hidden? %>
   <h2 class="title-lg mb">Вопрос№<%= @question.id %> <%= hidden %></h2>
-  <p class="mt-sm"><%= link_to "Все вопросы @#{@question.user.nickname}", user_path(@question.user.nickname) %></p>
+  <p class="mt-sm"><%= link_to "Все вопросы @#{@question.user.nickname}", user_path(@question.user) %></p>
 </div>
 
 <div class="container mt-sm">

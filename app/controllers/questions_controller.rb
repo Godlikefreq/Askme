@@ -49,7 +49,8 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.order(created_at: :desc).last(10)
+    @questions = Question.order(created_at: :desc).first(10)
+    @tags = Tag.all.map(&:name).each { |tag| tag.prepend("#") }.join(", ")
     @users = User.order(created_at: :desc).last(10)
   end
 
@@ -59,6 +60,11 @@ class QuestionsController < ApplicationController
   end
 
   def edit; end
+
+  def hashtags
+    @tag = Tag.find_by!(name: params[:name].downcase)
+    @questions = @tag.questions
+  end
 
   private
 

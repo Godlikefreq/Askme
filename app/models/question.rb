@@ -1,27 +1,20 @@
 class Question < ApplicationRecord
+  after_commit :save_hashtags, on: %i[ create update ]
+
   belongs_to :user
   belongs_to :author, class_name: "User", optional: true
 
-  has_and_belongs_to_many :tags
+  has_many :questions_tags, dependent: :destroy
+  has_many :tags, through: :questions_tags
 
   validates :body, presence: true, length: { maximum: 280 }
 
-  after_create do
-    question = Question.find_by(id: self.id)
-    hashtags = self.body.scan(/#[a-zA-Z0-9А-Яа-я]+/)
+  def save_hashtags
+    tags.clear
+    hashtags = body.scan(Tag::REGEX) + answer.scan(Tag::REGEX)
     hashtags.uniq.map do |hashtag|
       tag = Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
-      question.tags << tag
-    end
-  end
-
-  before_update do
-    question = Question.find_by(id: self.id)
-    question.tags.clear
-    hashtags = self.body.scan(/#[a-zA-Z0-9А-Яа-я]+/) + self.answer.scan(/#[a-zA-Z0-9А-Яа-я]+/)
-    hashtags.uniq.map do |hashtag|
-      tag = Tag.find_or_create_by(name: hashtag.downcase.delete("#"))
-      question.tags << tag
+      tags << tag
     end
   end
 end

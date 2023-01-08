@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_04_145230) do
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
-  create_table "questions_tags", id: false, force: :cascade do |t|
+  create_table "questions_tags", force: :cascade do |t|
     t.integer "question_id"
     t.integer "tag_id"
     t.datetime "created_at", null: false

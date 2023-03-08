@@ -19,7 +19,7 @@ bundle install
 
 ### Database setup
 1. To specify database name, adapter and other parameters for different scopes change it in `config/database.yml`. 
-Default DB adapter is **SQLite** ([**Install SQLite3 on Ubuntu 20.04**](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-sqlite-on-ubuntu-20-04)).
+Default DB adapter is **SQLite3** ([**Install SQLite3 on Ubuntu 20.04**](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-sqlite-on-ubuntu-20-04)).
 2. Run
 ```
 bundle exec rails db:migrate
